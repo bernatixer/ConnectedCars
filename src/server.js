@@ -9,12 +9,31 @@ import { App } from './components/App';
 const app = new Express();
 const server = new Server(app);
 
+// Conect to DB
+var mongo = require('./api/db.js');
+var db = mongo.connect();
+
 // use ejs templates
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
 app.use(Express.static(path.join(__dirname, 'static')));
+
+var bodyParser = require('body-parser');
+app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({
+    extended: true
+})); 
+
+app.post('/api/push', (req, res) => {
+    var name = req.body.name;
+    var email = req.body.email;
+    var pSortida = req.body.email;
+    var p = req.body.email;
+    // fer el push
+    res.redirect('/');
+});
 
 // universal routing and rendering
 app.get('*', (req, res) => {
