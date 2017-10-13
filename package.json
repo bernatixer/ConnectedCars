@@ -9,10 +9,8 @@
         "start": "npm run build && node src/server-es5.js",
         "start:universal": "export UNIVERSAL=true && npm run start",
         "start:dev": "export NODE_ENV=development && nodemon src/server.js",
-        "start:dev:universal":
-            "export NODE_ENV=development && export UNIVERSAL=true && npm run start:dev",
-        "build":
-            "NODE_ENV=production webpack -p --profile --display-modules --optimize-minimize",
+        "start:dev:universal": "export NODE_ENV=development && export UNIVERSAL=true && npm run start:dev",
+        "build": "NODE_ENV=production webpack -p --profile --display-modules --optimize-minimize",
         "build:dev": "webpack -d",
         "build:dev:watch": "webpack -d --watch"
     },
@@ -36,7 +34,9 @@
         "express": "^4.15.3",
         "react": "^16.0.0",
         "react-dom": "^16.0.0",
-        "react-router-dom": "^4.2.2"
+        "react-places-autocomplete": "^5.4.3",
+        "react-router-dom": "^4.2.2",
+        "url-loader": "^0.5.9"
     },
     "devDependencies": {
         "babel-loader": "^7.1.1",

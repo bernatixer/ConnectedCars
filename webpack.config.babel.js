@@ -18,6 +18,10 @@ const client = {
                     options: 'cacheDirectory=.babel_cache',
                 },
             },
+            {
+                test: /.(png|jpg)$/,
+                loader: 'url-loader?limit=8192',
+            },
         ],
     },
 };

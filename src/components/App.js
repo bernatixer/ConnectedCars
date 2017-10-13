@@ -5,7 +5,6 @@ import View from './View';
 
 export const App = () => (
     <div>
-        <p>Això sempre hi serà!</p>
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/view" component={View} />
