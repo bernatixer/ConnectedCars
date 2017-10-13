@@ -9,6 +9,7 @@ export const App = () => (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/view" component={View} />
+            <Route path="/map" component={Map} />
         </Switch>
     </div>
 );
