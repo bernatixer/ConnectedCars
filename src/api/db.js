@@ -20,9 +20,13 @@ module.exports = {
     },
     connect: function () {
         MongoClient.connect(url, function(err, db) {
-            assert.equal(null, err);
-            console.log("Connected successfully to server");
-            return db;
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                assert.equal(null, err);
+                console.log("Connected successfully to server");
+                return db;
+            }
         });
     }
 }
