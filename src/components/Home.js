@@ -90,14 +90,17 @@ class Address extends Component {
             autocompleteItemActive: { color: 'blue' },
         };
 
+        const hide = {
+            position: 'absolute',
+            left: '-9999px',
+            width: '1px',
+            height: '1px',
+        };
+
         return (
             <form onSubmit={this.handleFormSubmit}>
                 <PlacesAutocomplete inputProps={inputProps} />
-                <input
-                    type="submit"
-                    style="position: absolute; left: -9999px; width: 1px; height: 1px;"
-                    tabIndex="-1"
-                />
+                <input type="submit" style={hide} tabIndex="-1" />
             </form>
         );
     }
