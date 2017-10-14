@@ -78,16 +78,24 @@ class SetUp extends Component {
     render() {
         if (!this.state.missing)
             return (
-                <div className="setUp">
+                <div className="setUp container form-signin">
+                    <h2 className="form-signin-heading">Test</h2>
                     <Address
+                        className="col-sm-6"
                         address={this.state.addressStart}
                         onFormChange={this.handleChangeStart}
                     />
                     <Address
+                        className="col-sm-6"
                         address={this.state.addressEnd}
                         onFormChange={this.handleChangeEnd}
                     />
-                    <button onClick={this.handleGo}> GO </button>
+                    <button
+                        onClick={this.handleGo}
+                        className="btn btn-lg btn-primary btn-block goBtn"
+                    >
+                        GO
+                    </button>
                 </div>
             );
         else return <Redirect to="/missing" />;
@@ -134,7 +142,11 @@ class Address extends Component {
         };
 
         return (
-            <form onSubmit={this.handleFormSubmit} style={myStyles}>
+            <form
+                onSubmit={this.handleFormSubmit}
+                style={myStyles}
+                className="address"
+            >
                 <PlacesAutocomplete
                     inputProps={inputProps}
                     onEnterKeyDown={() =>

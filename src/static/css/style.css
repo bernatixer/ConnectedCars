@@ -1,0 +1,16 @@
+.setUp {
+    max-width: 500px !important;
+    position: absolute;
+    z-index: 15;
+    top: 50%;
+    left: 35%;
+    margin: -100px 0 0 -150px;
+}
+
+.goBtn {
+    margin-top: 10px;
+}
+
+.address {
+    margin-bottom: 10px;
+}

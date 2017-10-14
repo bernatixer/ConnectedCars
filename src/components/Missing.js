@@ -41,26 +41,33 @@ class Missing extends Component {
     render() {
         if (!this.state.return)
             return (
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input
-                            value={this.state.value}
-                            onChange={event =>
-                                this.setState({ name: event.target.value })}
-                        />
-                    </label>
-                    <label>
-                        Email:
-                        <input
-                            type="email"
-                            value={this.state.value}
-                            onChange={event =>
-                                this.setState({ email: event.target.value })}
-                        />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <div className="container">
+                    <form onSubmit={this.handleSubmit} className="form-signin">
+                        <h2 className="form-signin-heading">Test</h2>
+                        <label className="sr-only">
+                            Name:
+                            <input
+                                className="form-control"
+                                value={this.state.value}
+                                onChange={event =>
+                                    this.setState({ name: event.target.value })}
+                            />
+                        </label>
+                        <label className="sr-only">
+                            Email:
+                            <input
+                                className="form-control"
+                                type="email"
+                                value={this.state.value}
+                                onChange={event =>
+                                    this.setState({
+                                        email: event.target.value,
+                                    })}
+                            />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
             );
         else return <Redirect to="/" />;
     }
