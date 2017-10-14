@@ -1,22 +1,24 @@
-import axios from 'axios';
+function initMap() {
+    let cons = [];
 
-export default function initMap() {
-    const cons;
+    var myInit = {
+        method: 'GET',
+    };
 
-    axios
-        .get('/api/map')
+    fetch('/api/map/', myInit)
+        .then(response => reponse.blob())
         .then(response => {
             cons = JSON.parse(response);
-        })
-        .catch(error => {
-            console.log(error);
         });
-    
+
     const connections = [];
 
-    for (var i=0; i<cons.size; ++i) {
+    for (var i = 0; i < cons.size; ++i) {
         var con = cons[i];
-        connections.push({ entrada: {lat: con.start.startLat, lng: con.start.startLon}, sortida: {lat: con.end.endLat, lng: con.end.endLon} });
+        connections.push({
+            entrada: { lat: con.start.startLat, lng: con.start.startLon },
+            sortida: { lat: con.end.endLat, lng: con.end.endLon },
+        });
     }
 
     var map = new google.maps.Map(document.getElementById('map'), {
