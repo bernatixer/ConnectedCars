@@ -6,11 +6,12 @@ function initMap() {
     };
 
     fetch('/api/map/', myInit)
-        .then(response => reponse.blob())
+        .then(response => response.json())
         .then(response => {
-            cons = JSON.parse(response);
+            console.log(response);
         });
-
+    
+    
     const connections = [];
 
     for (var i = 0; i < cons.size; ++i) {
