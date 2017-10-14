@@ -23,3 +23,25 @@
 .form-control {
     max-width: 402px !important;
 }
+
+.map,
+.participants {
+    height: 100vh;
+    width: 100%;
+}
+
+.participants {
+    display: flex;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.participants li {
+    flex: 1;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.list-group {
+    width: 100%;
+}

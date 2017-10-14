@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import View from './View';
 import Missing from './Missing';
+import Mapa from './Map';
 
 export class App extends Component {
     constructor() {
@@ -28,26 +29,26 @@ export class App extends Component {
 
     render() {
         return (
-            <div>
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => <Home handleGeo={this.handleGeo} />}
-                    />
-                    <Route path="/view" component={View} />
-                    <Route path="/map" component={Map} />
-                    <Route
-                        path="/missing"
-                        render={() => (
-                            <Missing
-                                geoStart={this.state.geoStart}
-                                geoEnd={this.state.geoEnd}
-                            />
-                        )}
-                    />
-                </Switch>
-            </div>
+            // <div>
+            <Switch>
+                <Route
+                    exact
+                    path="/"
+                    render={() => <Home handleGeo={this.handleGeo} />}
+                />
+                <Route path="/view" component={View} />
+                <Route path="/map" component={Mapa} />
+                <Route
+                    path="/missing"
+                    render={() => (
+                        <Missing
+                            geoStart={this.state.geoStart}
+                            geoEnd={this.state.geoEnd}
+                        />
+                    )}
+                />
+            </Switch>
+            //</div>
         );
     }
 }
