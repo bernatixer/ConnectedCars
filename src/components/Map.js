@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Mapa = () => (
     <div className="row">
-        <div className="map col-sm-9">
-            <iframe
-                width="600"
-                height="450"
-                frameBorder="0"
-                style={{ border: 0 }}
-                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&q=Barcelona"
-                allowFullScreen
-            />
+        <div className="col-sm-9" id="map">
+            <span />
         </div>
+        <script src="js/maps.js" />
+        <script
+            async
+            defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&callback=initMap"
+        />
         <div className="participants col-sm-3">
             <ul className="list-group">
                 <li className="list-group-item">Item 1</li>
