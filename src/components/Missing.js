@@ -32,7 +32,9 @@ class Missing extends Component {
             .lat},${this.props.geoEnd.lng}`;
         axios
             .get(url)
-            .then(response => {})
+            .then(response => {
+                this.setState({ return: true });
+            })
             .catch(error => {
                 console.log(error);
             });
@@ -77,7 +79,7 @@ class Missing extends Component {
                     </form>
                 </div>
             );
-        else return <Redirect to="/" />;
+        else return <Redirect to="/map" />;
     }
 }
 

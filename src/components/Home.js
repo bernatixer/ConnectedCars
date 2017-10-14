@@ -27,6 +27,7 @@ class SetUp extends Component {
                 lng: 0,
             },
             missing: false,
+            found: false,
         };
 
         this.handleChangeStart = this.handleChangeStart.bind(this);
@@ -62,12 +63,19 @@ class SetUp extends Component {
             const url = `/api/search/${this.state.geoStart.lat},${this.state
                 .geoStart.lng}/${this.state.geoEnd.lat},${this.state.geoEnd
                 .lng}`;
-            this.props.handleGeo(this.state.geoStart, this.state.geoEnd);
             axios
                 .get(url)
                 .then(response => {
-                    if (response.data == 'missing')
+                    if (response.data == 'missing') {
+                        this.props.handleGeo(
+                            this.state.geoStart,
+                            this.state.geoEnd
+                        );
                         this.setState({ missing: true });
+                    } else {
+                        this.setState({ found: true });
+                        this.props.otherRoutes(response);
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -100,7 +108,8 @@ class SetUp extends Component {
                     </button>
                 </div>
             );
-        else return <Redirect to="/missing" />;
+        else if (this.state.missing) return <Redirect to="/missing" />;
+        else if (this.state.found) return <Redirect to="/found" />;
     }
 }
 

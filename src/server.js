@@ -39,25 +39,37 @@ app.get('/api/map', (req, res) => {
 });
 
 app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    var start = { startLat: Number(req.params.outLat), startLon: Number(req.params.outLon) };
-    var end = { endLat: Number(req.params.inLat), endLon: Number(req.params.inLon) };
+    var start = {
+        startLat: Number(req.params.outLat),
+        startLon: Number(req.params.outLon),
+    };
+    var end = {
+        endLat: Number(req.params.inLat),
+        endLon: Number(req.params.inLon),
+    };
     mongo.push(req.params.name, req.params.email, start, end);
     res.redirect('/');
 });
 
 app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    var start = { startLat: Number(req.params.outLat), startLon: Number(req.params.outLon) };
-    var end = { endLat: Number(req.params.inLat), endLon: Number(req.params.inLon) };
+    var start = {
+        startLat: Number(req.params.outLat),
+        startLon: Number(req.params.outLon),
+    };
+    var end = {
+        endLat: Number(req.params.inLat),
+        endLon: Number(req.params.inLon),
+    };
     mongo.search(start, end, function(err, result) {
         if (err) {
             console.log('Failed');
             res.redirect('/');
         } else {
             console.log(result);
-            if (result.size == 0) {
+            if (result.length == 0) {
                 res.send('missing');
             } else {
-                res.send('found');
+                res.send(result);
             }
         }
     });

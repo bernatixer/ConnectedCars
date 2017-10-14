@@ -14,6 +14,10 @@ function loadAPI() {
 }
 
 class Mapa extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
         if (typeof window !== 'undefined') {
             const script = document.createElement('script');

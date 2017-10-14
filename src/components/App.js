@@ -4,6 +4,7 @@ import Home from './Home';
 import View from './View';
 import Missing from './Missing';
 import Mapa from './Map';
+import Found from './Found';
 
 export class App extends Component {
     constructor() {
@@ -17,14 +18,19 @@ export class App extends Component {
                 lat: 0,
                 lng: 0,
             },
+            otherRoutes: {},
         };
 
         this.handleGeo = this.handleGeo.bind(this);
+        this.handleOther = this.handleOther.bind(this);
     }
 
     handleGeo(geoStart, geoEnd) {
         this.setState({ geoStart, geoEnd });
-        //console.log(this.state);
+    }
+
+    handleOther(otherRoutes) {
+        this.setState({ otherRoutes });
     }
 
     render() {
@@ -34,10 +40,15 @@ export class App extends Component {
                 <Route
                     exact
                     path="/"
-                    render={() => <Home handleGeo={this.handleGeo} />}
+                    render={() => (
+                        <Home
+                            handleGeo={this.handleGeo}
+                            otherRoutes={this.handleOther}
+                        />
+                    )}
                 />
                 <Route path="/view" component={View} />
-                <Route path="/map" component={Mapa} />
+                <Route path="/map" render={() => <Mapa />} />
                 <Route
                     path="/missing"
                     render={() => (
@@ -47,6 +58,7 @@ export class App extends Component {
                         />
                     )}
                 />
+                <Route path="/found" render={() => <Found />} />
             </Switch>
             //</div>
         );
