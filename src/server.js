@@ -8,6 +8,7 @@ import { App } from './components/App';
 
 const app = new Express();
 const server = new Server(app);
+const ejs = require('ejs');
 
 // Conect to DB
 var mongo = require('./api/db.js');
@@ -26,6 +27,16 @@ app.use(
         extended: true,
     })
 );
+
+app.get('/map', (req, res) => {
+    mongo.map(function(err, data) {
+        if (err) {
+            res.redirect('/');
+        } else {
+            res.render('mapa.ejs', {connections_data: data});
+        }
+    });
+});
 
 app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
     var start = { startLat: Number(req.params.outLat), startLon: Number(req.params.outLon) };

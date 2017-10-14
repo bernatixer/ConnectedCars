@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>ConnectedCars</title>
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 41.4040323, lng: 2.1144441},
+          mapTypeId: 'terrain'
+        });
+
+        var lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+          };
+
+        for (var connection in connections) {
+          var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+          var cityCircle = new google.maps.Circle({
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: color,
+            fillOpacity: 0.35,
+            map: map,
+            center: connections[connection].sortida,
+            radius: 4
+          });
+          var cityCircle2 = new google.maps.Circle({
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: color,
+            fillOpacity: 0.35,
+            map: map,
+            center: connections[connection].entrada,
+            radius: 4
+          });
+
+          var line = new google.maps.Polyline({
+            path: [cityCircle.center, cityCircle2.center],
+            strokeColor: color,
+            strokeOpacity: 0.8,
+              strokeWeight: 2,
+            icons: [{
+              icon: lineSymbol,
+              offset: '100%',
+              strokeColor: color
+            }],
+            map: map
+          });
+        }
+        /*
+        for (var city in citymap) {
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: citymap[city].center,
+            radius: Math.sqrt(citymap[city].radi) * 100
+          });
+        }
+
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
+
+        var line = new google.maps.Polyline({
+          path: [{lat: 41.3893302, lng: 2.1772378}, {lat: 41.3891491, lng: 2.1161658}],
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+            strokeWeight: 2,
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%',
+            strokeColor: '#FF0000'
+          }],
+          map: map
+        });
+        */
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&callback=initMap">
+    </script>
+  </body>
+</html>
