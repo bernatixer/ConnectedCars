@@ -54,6 +54,7 @@ class SetUp extends Component {
     }
 
     handleGo() {
+        console.log(this.state);
         if (
             this.state.geoStart.lat == 0 ||
             this.state.geoStart.lng == 0 ||
