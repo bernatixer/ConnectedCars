@@ -36,18 +36,18 @@ class SetUp extends Component {
     }
 
     handleChangeStart(address) {
-        this.setState({ addressStart: address });
         geocodeByAddress(this.state.addressStart)
             .then(results => getLatLng(results[0]))
-            .then(geoStart => this.setState({ geoStart }))
+            .then(geoStart =>
+                this.setState({ geoStart, addressStart: address })
+            )
             .catch(error => console.error('Error', error));
     }
 
     handleChangeEnd(address) {
-        this.setState({ addressEnd: address });
         geocodeByAddress(this.state.addressEnd)
             .then(results => getLatLng(results[0]))
-            .then(geoEnd => this.setState({ geoEnd }))
+            .then(geoEnd => this.setState({ geoEnd, addressEnd: address }))
             .catch(error => console.error('Error', error));
     }
 
@@ -73,8 +73,8 @@ class SetUp extends Component {
                         );
                         this.setState({ missing: true });
                     } else {
-                        this.setState({ found: true });
                         this.props.otherRoutes(response);
+                        this.setState({ found: true });
                     }
                 })
                 .catch(error => {

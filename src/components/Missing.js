@@ -45,7 +45,7 @@ class Missing extends Component {
             return (
                 <div className="container missing">
                     <form onSubmit={this.handleSubmit}>
-                        <h2 className="form-signin-heading">Test</h2>
+                        <h2 className="form-signin-heading">Missing</h2>
                         <div className="form-group row">
                             <label className="col-form-label col-sm-2">
                                 Name:
