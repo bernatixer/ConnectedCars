@@ -26,22 +26,25 @@ app.use(bodyParser.urlencoded({
 })); 
 
 app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    var start = { startLat: req.params.outLat, startLon: req.params.outLon };
-    var end = { endLat: req.params.inLat, endLon: req.params.inLon };
+    var start = { startLat: Number(req.params.outLat), startLon: Number(req.params.outLon) };
+    var end = { endLat: Number(req.params.inLat), endLon: Number(req.params.inLon) };
     mongo.push(req.params.name, req.params.email, start, end);
     res.redirect('/');
 });
 
 app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    var start = { startLat: req.params.outLat, startLon: req.params.outLon };
-    var end = { endLat: req.params.inLat, endLon: req.params.inLon };
+    var start = { startLat: Number(req.params.outLat), startLon: Number(req.params.outLon) };
+    var end = { endLat: Number(req.params.inLat), endLon: Number(req.params.inLon) };
     mongo.search(start, end, function(err, result) {
         if (err) {
             console.log('Failed');
+            res.redirect('/');
         } else {
+            res.send('missing');
             console.log(result);
+            // veure si hi ha algo al radius
+            // res.send('found');
         }
-        res.redirect('/');
     });
 });
 

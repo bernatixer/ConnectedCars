@@ -4,17 +4,29 @@ var assert = require('assert');
 var url = 'mongodb://localhost:27017/connected_cars';
 
 module.exports = {
-    search: function (start, end, callback) {
+    search: function (startP, endP, callback) {
         MongoClient.connect(url, function(err, db) {
             if (err) {
                 console.log('Unable to connect to the mongoDB server. Error: ', err);
             } else {
-                var query = { start: start, end: end };
+                var query = { start: startP, end: endP };
                 console.log(query);
-                db.collection("connections").find(query).toArray(function(err, result) {
-                  if (err) throw err;
-                  callback(err, result);
-                  db.close();
+                /*
+                db.collection("connections").find({
+                    0.02: { $gt:
+                        { $sqrt:
+                            { $add: [
+                                { $pow: [ { $substract: [ startP.startLat, "start.startLat", 2 ] }, 2 ] },
+                                { $pow: [ { $substract: [ startP.startLon, "start.startLon", 2 ] }, 2 ] }
+                            ] }
+                        }
+                    }*/
+                db.collection("connections").find({ $where: "(obj.startP.startLat-this.start.startLat)^2 + (obj.startP.startLon-this.start.startLon)^2 < 2" }
+                ).toArray(function(err, result) {
+                    console.log(err)
+                    console.log(result)
+                    callback(err, result);
+                    db.close();
                 });
             }
         });
