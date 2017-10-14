@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({
 })); 
 
 app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    // var name = req.body.name;
     var start = { startLat: req.params.outLat, startLon: req.params.outLon };
     var end = { endLat: req.params.inLat, endLon: req.params.inLon };
     mongo.push(req.params.name, req.params.email, start, end);
@@ -34,11 +33,16 @@ app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
 });
 
 app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
-    // var name = req.body.name;
     var start = { startLat: req.params.outLat, startLon: req.params.outLon };
     var end = { endLat: req.params.inLat, endLon: req.params.inLon };
-    mongo.search(start, end);
-    res.redirect('/');
+    mongo.search(start, end, function(err, result) {
+        if (err) {
+            console.log('Failed');
+        } else {
+            console.log(result);
+        }
+        res.redirect('/');
+    });
 });
 
 app.get('/api/push', (req, res) => {
