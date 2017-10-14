@@ -59,6 +59,7 @@ class SetUp extends Component {
                     address={this.state.addressEnd}
                     onFormChange={this.handleChangeEnd}
                 />
+                <button onClick={() => console.log(this.state)} />
             </div>
         );
     }
@@ -68,11 +69,17 @@ class Address extends Component {
     constructor(props) {
         super(props);
         this.state = { address: props.address };
-        this.onChange = address => this.setState({ address });
+        this.onChange = this.onChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    handleFormSubmit() {
+    onChange(address) {
+        this.setState({ address });
+        this.props.onFormChange(this.state.address);
+    }
+
+    handleFormSubmit(event) {
+        event.preventDefault();
         this.props.onFormChange(this.state.address);
     }
 
@@ -99,7 +106,11 @@ class Address extends Component {
 
         return (
             <form onSubmit={this.handleFormSubmit}>
-                <PlacesAutocomplete inputProps={inputProps} />
+                <PlacesAutocomplete
+                    inputProps={inputProps}
+                    onEnterKeyDown={() =>
+                        this.props.onFormChange(this.state.address)}
+                />
                 <input type="submit" style={hide} tabIndex="-1" />
             </form>
         );
