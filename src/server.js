@@ -11,7 +11,6 @@ const server = new Server(app);
 
 // Conect to DB
 var mongo = require('./api/db.js');
-var db = mongo.connect();
 
 // use ejs templates
 app.set('view engine', 'ejs');
@@ -26,13 +25,29 @@ app.use(bodyParser.urlencoded({
     extended: true
 })); 
 
+app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
+    // var name = req.body.name;
+    var start = { startLat: req.params.outLat, startLon: req.params.outLon };
+    var end = { endLat: req.params.inLat, endLon: req.params.inLon };
+    mongo.push(req.params.name, req.params.email, start, end);
+    res.redirect('/');
+});
+
+app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
+    // var name = req.body.name;
+    var start = { startLat: req.params.outLat, startLon: req.params.outLon };
+    var end = { endLat: req.params.inLat, endLon: req.params.inLon };
+    mongo.search(start, end);
+    res.redirect('/');
+});
+
 app.get('/api/push', (req, res) => {
     /*var name = req.body.name;
     var email = req.body.email;
     var pSortida = req.body.email;
     var p = req.body.email;*/
     // fer el push
-    mongo.insert(db);
+    mongo.insert();
     res.redirect('/');
 });
 

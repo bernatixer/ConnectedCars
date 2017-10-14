@@ -1,31 +1,33 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
-var url = 'mongodb://localhost:27017/connected-cars';
+var url = 'mongodb://localhost:27017/connected_cars';
 
 module.exports = {
-    search: function (db) {
-        var query = { address: "Barcelona" };
-        db.collection("connections").find(query).toArray(function(err, result) {
-          if (err) throw err;
-          return result;
-        });
-    },
-    insert: function (db) {
-        var myobj = { name: "Berni", address: "Barcelona" };
-        db.collection("connections").insertOne(myobj, function(err, res) {
-          if (err) throw err;
-          console.log("1 document inserted");
-        });
-    },
-    connect: function () {
+    search: function (start, end) {
         MongoClient.connect(url, function(err, db) {
             if (err) {
-                console.log('Unable to connect to the mongoDB server. Error:', err);
+                console.log('Unable to connect to the mongoDB server. Error: ', err);
             } else {
-                assert.equal(null, err);
-                console.log("Connected successfully to server");
-                return db;
+                var query = { start: start, end: end };
+                db.collection("connections").find(query).toArray(function(err, result) {
+                  if (err) throw err;
+                  db.close();
+                });
+            }
+        });
+    },
+    push: function (name, email, start, end) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error: ', err);
+            } else {
+                var conexio = { name: name, email: email, start: start, end: end };
+                db.collection("connections").insertOne(conexio, function(err, res) {
+                  if (err) throw err;
+                  console.log("Conexio insertada");
+                  db.close();
+                });
             }
         });
     }
