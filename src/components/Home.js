@@ -84,11 +84,13 @@ class SetUp extends Component {
                         className="col-sm-6"
                         address={this.state.addressStart}
                         onFormChange={this.handleChangeStart}
+                        placeholder="Posa l'adreça d'inici"
                     />
                     <Address
                         className="col-sm-6"
                         address={this.state.addressEnd}
                         onFormChange={this.handleChangeEnd}
+                        placeholder="Posa l'adreça final"
                     />
                     <button
                         onClick={this.handleGo}
@@ -124,6 +126,7 @@ class Address extends Component {
         const inputProps = {
             value: this.state.address,
             onChange: this.onChange,
+            placeholder: this.props.placeholder,
         };
 
         const myStyles = {

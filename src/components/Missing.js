@@ -41,22 +41,26 @@ class Missing extends Component {
     render() {
         if (!this.state.return)
             return (
-                <div className="container">
-                    <form onSubmit={this.handleSubmit} className="form-signin">
+                <div className="container missing">
+                    <form onSubmit={this.handleSubmit}>
                         <h2 className="form-signin-heading">Test</h2>
-                        <label className="sr-only">
-                            Name:
+                        <div className="form-group row">
+                            <label className="col-form-label col-sm-2">
+                                Name:
+                            </label>
                             <input
-                                className="form-control"
+                                className="form-control col-sm-10"
                                 value={this.state.value}
                                 onChange={event =>
                                     this.setState({ name: event.target.value })}
                             />
-                        </label>
-                        <label className="sr-only">
-                            Email:
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-form-label col-sm-2">
+                                Email:
+                            </label>
                             <input
-                                className="form-control"
+                                className="form-control col-sm-10"
                                 type="email"
                                 value={this.state.value}
                                 onChange={event =>
@@ -64,8 +68,12 @@ class Missing extends Component {
                                         email: event.target.value,
                                     })}
                             />
-                        </label>
-                        <input type="submit" value="Submit" />
+                        </div>
+                        <input
+                            type="submit"
+                            value="CREAR RUTA"
+                            className="btn btn-lg btn-primary btn-block crearRuta"
+                        />
                     </form>
                 </div>
             );

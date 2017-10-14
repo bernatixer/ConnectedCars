@@ -1,4 +1,5 @@
-.setUp {
+.setUp,
+.missing {
     max-width: 500px !important;
     position: absolute;
     z-index: 15;
@@ -13,4 +14,12 @@
 
 .address {
     margin-bottom: 10px;
+}
+
+.crearRuta {
+    margin-top: 20px;
+}
+
+.form-control {
+    max-width: 402px !important;
 }
