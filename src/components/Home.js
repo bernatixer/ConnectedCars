@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
+import axios from 'axios';
 
 export const Home = () => (
     <div className="home">
@@ -20,23 +21,24 @@ class SetUp extends Component {
             addressEnd: '',
             geoStart: {
                 lat: 0,
-                long: 0,
+                lng: 0,
             },
             geoEnd: {
                 lat: 0,
-                long: 0,
+                lng: 0,
             },
         };
 
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
+        this.handleGo = this.handleGo.bind(this);
     }
 
     handleChangeStart(address) {
         this.setState({ addressStart: address });
         geocodeByAddress(this.state.addressStart)
             .then(results => getLatLng(results[0]))
-            .then(latLng => this.setState({ geoStart: latLng }))
+            .then(geoStart => this.setState({ geoStart }))
             .catch(error => console.error('Error', error));
     }
 
@@ -44,8 +46,31 @@ class SetUp extends Component {
         this.setState({ addressEnd: address });
         geocodeByAddress(this.state.addressEnd)
             .then(results => getLatLng(results[0]))
-            .then(latLng => this.setState({ geoEnd: latLng }))
+            .then(geoEnd => this.setState({ geoEnd }))
             .catch(error => console.error('Error', error));
+    }
+
+    handleGo() {
+        if (
+            this.state.geoStart.lat == 0 ||
+            this.state.geoStart.long == 0 ||
+            this.state.geoEnd.lat == 0 ||
+            this.state.geoEnd.long == 0
+        )
+            console.log('Missing params');
+        else {
+            const url = `/api/search/${this.state.geoStart.lat},${this.state
+                .geoStart.lng}/${this.state.geoEnd.lat},${this.state.geoEnd
+                .lng}`;
+            axios
+                .get(url)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
     }
 
     render() {
@@ -59,7 +84,7 @@ class SetUp extends Component {
                     address={this.state.addressEnd}
                     onFormChange={this.handleChangeEnd}
                 />
-                <button onClick={() => console.log(this.state)} />
+                <button onClick={this.handleGo}> GO </button>
             </div>
         );
     }
