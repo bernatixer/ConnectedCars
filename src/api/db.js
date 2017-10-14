@@ -5,7 +5,7 @@ var url = 'mongodb://localhost:27017/connected-cars';
 
 module.exports = {
     search: function (db) {
-        var query = { address: "Argentona" };
+        var query = { address: "Barcelona" };
         db.collection("connections").find(query).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
