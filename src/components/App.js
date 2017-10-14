@@ -23,7 +23,7 @@ export class App extends Component {
 
     handleGeo(geoStart, geoEnd) {
         this.setState({ geoStart, geoEnd });
-        console.log(this.state);
+        //console.log(this.state);
     }
 
     render() {
@@ -37,7 +37,15 @@ export class App extends Component {
                     />
                     <Route path="/view" component={View} />
                     <Route path="/map" component={Map} />
-                    <Route path="/missing" component={Missing} />
+                    <Route
+                        path="/missing"
+                        render={() => (
+                            <Missing
+                                geoStart={this.state.geoStart}
+                                geoEnd={this.state.geoEnd}
+                            />
+                        )}
+                    />
                 </Switch>
             </div>
         );

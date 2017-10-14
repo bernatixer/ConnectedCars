@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
@@ -26,6 +26,7 @@ class SetUp extends Component {
                 lat: 0,
                 lng: 0,
             },
+            missing: false,
         };
 
         this.handleChangeStart = this.handleChangeStart.bind(this);
@@ -61,32 +62,35 @@ class SetUp extends Component {
             const url = `/api/search/${this.state.geoStart.lat},${this.state
                 .geoStart.lng}/${this.state.geoEnd.lat},${this.state.geoEnd
                 .lng}`;
+            this.props.handleGeo(this.state.geoStart, this.state.geoEnd);
             axios
                 .get(url)
-                .then(function(response) {
-                    console.log(response);
+                .then(response => {
+                    if (response.data == 'missing')
+                        this.setState({ missing: true });
                 })
-                .catch(function(error) {
+                .catch(error => {
                     console.log(error);
                 });
-            this.props.handleGeo(this.state.geoStart, this.state.geoEnd);
         }
     }
 
     render() {
-        return (
-            <div className="setUp">
-                <Address
-                    address={this.state.addressStart}
-                    onFormChange={this.handleChangeStart}
-                />
-                <Address
-                    address={this.state.addressEnd}
-                    onFormChange={this.handleChangeEnd}
-                />
-                <button onClick={this.handleGo}> GO </button>
-            </div>
-        );
+        if (!this.state.missing)
+            return (
+                <div className="setUp">
+                    <Address
+                        address={this.state.addressStart}
+                        onFormChange={this.handleChangeStart}
+                    />
+                    <Address
+                        address={this.state.addressEnd}
+                        onFormChange={this.handleChangeEnd}
+                    />
+                    <button onClick={this.handleGo}> GO </button>
+                </div>
+            );
+        else return <Redirect to="/missing" />;
     }
 }
 

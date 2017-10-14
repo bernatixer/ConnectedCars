@@ -6,7 +6,7 @@ class Missing extends Component {
     }
 
     render() {
-        <div>Heya</div>;
+        return <div>props</div>;
     }
 }
 
