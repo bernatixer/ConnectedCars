@@ -28,12 +28,12 @@ app.use(
     })
 );
 
-app.get('/map', (req, res) => {
+app.get('/api/map', (req, res) => {
     mongo.map(function(err, data) {
         if (err) {
             res.redirect('/');
         } else {
-            res.render('mapa.ejs', {connections_data: data});
+            res.send(JSON.stringify(data));
         }
     });
 });
@@ -53,10 +53,12 @@ app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
             console.log('Failed');
             res.redirect('/');
         } else {
-            res.send('missing');
             console.log(result);
-            // veure si hi ha algo al radius
-            // res.send('found');
+            if (result.size == 0) {
+                res.send('missing');
+            } else {
+                res.send('found');
+            }
         }
     });
 });

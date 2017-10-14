@@ -22,6 +22,14 @@
 <body>
     <div id="map"></div>
     <script>
+
+
+var connections = [];
+      for (var i=0; i<FETCH.size; ++i) {
+        var con = FETCH[i];
+        cons.push({ entrada: {lat: con.start.startLat, lng: con.start.startLon}, sortida: {lat: con.end.endLat, lng: con.end.endLon} });
+      }
+
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
