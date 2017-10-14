@@ -63,17 +63,6 @@ app.get('/api/search/:outLat,:outLon/:inLat,:inLon', (req, res) => {
     });
 });
 
-app.get('/api/push', (req, res) => {
-    /*var name = req.body.name;
-    var email = req.body.email;
-    var pSortida = req.body.email;
-    var p = req.body.email;*/
-    // fer el push
-    mongo.insert();
-    res.redirect('/');
-});
-
-// universal routing and rendering
 app.get('*', (req, res) => {
     let markup = '';
     let status = 200;
