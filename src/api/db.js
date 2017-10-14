@@ -10,7 +10,6 @@ module.exports = {
                 console.log('Unable to connect to the mongoDB server. Error: ', err);
             } else {
                 var query = { start: startP, end: endP };
-                console.log(query);
                 /*
                 db.collection("connections").find({
                     0.02: { $gt:
@@ -21,10 +20,9 @@ module.exports = {
                             ] }
                         }
                     }*/
-                db.collection("connections").find({ $where: "(obj.startP.startLat-this.start.startLat)^2 + (obj.startP.startLon-this.start.startLon)^2 < 2" }
-                ).toArray(function(err, result) {
-                    console.log(err)
-                    console.log(result)
+                db.collection("connections").find({ $where:
+                    "("+startP.startLat+"-this.start.startLat)*("+startP.startLat+"-this.start.startLat) + ("+startP.startLon+"-this.start.startLon)*("+startP.startLon+"-this.start.startLon) <= 0.02"
+                }).toArray(function(err, result) {
                     callback(err, result);
                     db.close();
                 });
