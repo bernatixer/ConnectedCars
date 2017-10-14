@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+function loadAPI() {
+    if (typeof window !== 'undefined') {
+        const script = document.createElement('script');
+        script.onload = () => initMap();
+        script.src =
+            'https://maps.googleapis.com/maps/api/js?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&callback=initMap';
+        script.async = true;
+        script.defer = true;
+
+        document.body.appendChild(script);
+    }
+}
+
 class Mapa extends Component {
     componentDidMount() {
         if (typeof window !== 'undefined') {
             const script = document.createElement('script');
+            script.onload = () => loadAPI();
             script.src = '/js/maps.js';
-            document.body.appendChild(script);
-        }
-        if (typeof window !== 'undefined') {
-            const script = document.createElement('script');
-
-            script.src =
-                'https://maps.googleapis.com/maps/api/js?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&callback=initMap';
-            script.async = true;
-            script.defer = true;
-
-            document.addEventListener('fetch', () => {
-                if (event.request.method != 'GET') return;
-                initMap();
-            });
-
             document.body.appendChild(script);
         }
     }
