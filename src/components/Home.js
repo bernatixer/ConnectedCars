@@ -36,18 +36,20 @@ class SetUp extends Component {
     }
 
     handleChangeStart(address) {
+        console.log(address);
+        this.setState({ addressStart: address });
         geocodeByAddress(this.state.addressStart)
             .then(results => getLatLng(results[0]))
-            .then(geoStart =>
-                this.setState({ geoStart, addressStart: address })
-            )
+            .then(latLng => this.setState({ geoStart: latLng }))
             .catch(error => console.error('Error', error));
     }
 
     handleChangeEnd(address) {
+        console.log(address);
+        this.setState({ addressEnd: address });
         geocodeByAddress(this.state.addressEnd)
             .then(results => getLatLng(results[0]))
-            .then(geoEnd => this.setState({ geoEnd, addressEnd: address }))
+            .then(latLng => this.setState({ geoEnd: latLng }))
             .catch(error => console.error('Error', error));
     }
 
