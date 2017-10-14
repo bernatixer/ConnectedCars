@@ -53,9 +53,9 @@ class SetUp extends Component {
     handleGo() {
         if (
             this.state.geoStart.lat == 0 ||
-            this.state.geoStart.long == 0 ||
+            this.state.geoStart.lng == 0 ||
             this.state.geoEnd.lat == 0 ||
-            this.state.geoEnd.long == 0
+            this.state.geoEnd.lng == 0
         )
             console.log('Missing params');
         else {
@@ -134,7 +134,7 @@ class Address extends Component {
         };
 
         return (
-            <form onSubmit={this.handleFormSubmit}>
+            <form onSubmit={this.handleFormSubmit} style={myStyles}>
                 <PlacesAutocomplete
                     inputProps={inputProps}
                     onEnterKeyDown={() =>
