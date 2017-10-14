@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 function loadAPI() {
     if (typeof window !== 'undefined') {
         const script = document.createElement('script');
-        script.onload = () => initMap();
         script.src =
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyBYggAidKpuAbwGNtc70x3WK6upK092ZJo&callback=initMap';
         script.async = true;
