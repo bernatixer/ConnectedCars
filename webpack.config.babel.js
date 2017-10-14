@@ -15,7 +15,7 @@ const client = {
                 test: path.join(__dirname, 'src'),
                 use: {
                     loader: 'babel-loader',
-                    options: 'cacheDirectory=.babel_cache',
+                    options: 'cacheDirectory=node_modules/.cache/babel-loader',
                 },
             },
             {
@@ -50,7 +50,7 @@ const server = {
                 test: path.join(__dirname, 'src'),
                 use: {
                     loader: 'babel-loader',
-                    options: 'cacheDirectory=.babel_cache',
+                    options: 'cacheDirectory=node_modules/.cache/babel-loader',
                 },
             },
         ],
