@@ -26,12 +26,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 })); 
 
-app.post('/api/push', (req, res) => {
-    var name = req.body.name;
+app.get('/api/push', (req, res) => {
+    /*var name = req.body.name;
     var email = req.body.email;
     var pSortida = req.body.email;
-    var p = req.body.email;
+    var p = req.body.email;*/
     // fer el push
+    mongo.insert(db);
     res.redirect('/');
 });
 

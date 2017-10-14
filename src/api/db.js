@@ -8,7 +8,14 @@ module.exports = {
         var query = { address: "Barcelona" };
         db.collection("connections").find(query).toArray(function(err, result) {
           if (err) throw err;
-          console.log(result);
+          return result;
+        });
+    },
+    insert: function (db) {
+        var myobj = { name: "Berni", address: "Barcelona" };
+        db.collection("connections").insertOne(myobj, function(err, res) {
+          if (err) throw err;
+          console.log("1 document inserted");
         });
     },
     connect: function () {
