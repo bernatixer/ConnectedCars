@@ -6,9 +6,9 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import axios from 'axios';
 
-export const Home = () => (
+const Home = props => (
     <div className="home">
-        <SetUp />
+        <SetUp handleGeo={props.handleGeo} />
     </div>
 );
 
@@ -16,7 +16,6 @@ class SetUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
             addressStart: '',
             addressEnd: '',
             geoStart: {
@@ -70,6 +69,7 @@ class SetUp extends Component {
                 .catch(function(error) {
                     console.log(error);
                 });
+            this.props.handleGeo(this.state.geoStart, this.state.geoEnd);
         }
     }
 

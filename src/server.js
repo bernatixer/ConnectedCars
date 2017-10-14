@@ -20,10 +20,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(Express.static(path.join(__dirname, 'static')));
 
 var bodyParser = require('body-parser');
-app.use( bodyParser.json() );
-app.use(bodyParser.urlencoded({
-    extended: true
-})); 
+app.use(bodyParser.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 
 app.get('/api/push/:name/:email/:outLat,:outLon/:inLat,:inLon', (req, res) => {
     var start = { startLat: req.params.outLat, startLon: req.params.outLon };
