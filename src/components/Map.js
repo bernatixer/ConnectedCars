@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import initMap from './maps';
 
 const Mapa = () => (
     <div className="row">
         <div className="col-sm-9" id="map">
             <span />
         </div>
-        <script src="js/maps.js" />
+        {initMap()}
         <script
             async
             defer
