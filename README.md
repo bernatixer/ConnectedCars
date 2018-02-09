@@ -1,5 +1,5 @@
 # ConnectedCars
-Make tempral chat rooms to talk to anybody privately
+A simple car sharing application. Easy to use, made for sharing daily routes.
 
 ## How to deploy ConnectedCars
 
